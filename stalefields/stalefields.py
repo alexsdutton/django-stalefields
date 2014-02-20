@@ -9,10 +9,14 @@ from django.conf import settings
 from django.db import router
 from django.db.models import signals
 
+try: # Python 3
+    primitive_types = (int, bool, str, bytes)
+except NameError: # Python 2
+    primitive_types = (int, long, bool, unicode, str)
 
 def stale_copy(value):
     # no copy for primitives
-    if isinstance(value, int) or isinstance(value, bool) or isinstance(value, basestring):
+    if isinstance(value, primitive_types):
         return value
     # deepcopy for things like JSONField (where the object reference is sticky)
     return copy.deepcopy(value)
