@@ -110,14 +110,14 @@ class StaleFieldsMixinTestCase(TestCase):
 
             earlier = time.time()
 
-            for x in xrange(iters):
+            for x in range(iters):
                 tm.characters += chars.pop()
                 if only_save_stale:
                     tm.save_stale()
                 else:
                     tm.save()
 
-            for x in xrange(iters):
+            for x in range(iters):
                 tm.boolean = not tm.boolean
                 tm.save()
                 if only_save_stale:
@@ -127,4 +127,5 @@ class StaleFieldsMixinTestCase(TestCase):
 
             lengths.append(time.time() - earlier)
 
-        print lengths[0], 'vs', lengths[1]
+        print("{0} vs {1}".format(*lengths))
+
