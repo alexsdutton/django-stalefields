@@ -45,7 +45,7 @@ class StaleFieldsMixin(object):
 
     def get_changed_values(self):
         new_state = self._as_dict()
-        return {name: new_state[name] for name, old_value in self._original_state.iteritems() if old_value != new_state[name]}
+        return {name: new_state[name] for name, old_value in self._original_state.items() if old_value != new_state[name]}
 
     @property
     def stale_fields(self):
@@ -103,7 +103,7 @@ class StaleFieldsMixin(object):
 
                 # maps db column names back to field names if they differ
                 field_map = {f.column: f.name for f in self._meta.fields if f.db_column}
-                for field_from, field_to in field_map.iteritems():
+                for field_from, field_to in field_map.items():
                     if field_from in changed_values:
                         changed_values[field_to] = changed_values[field_from]
                         del changed_values[field_from]
